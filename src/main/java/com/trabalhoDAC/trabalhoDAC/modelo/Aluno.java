@@ -7,6 +7,7 @@ package com.trabalhoDAC.trabalhoDAC.modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -22,6 +23,14 @@ public class Aluno extends Usuario implements Serializable {
     @OneToMany
     private Projeto projeto;
     private List<String> interesses;
+
+    public Aluno(String nome, String cpf, String endereco, String telefone, String matricula, String login, String senha, boolean autorizado) {
+        super(nome, cpf, endereco, telefone, matricula, login, senha, autorizado);
+    }
+
+    public Aluno() {
+        super();
+    }
 
     public Disciplina getDisciplina() {
         return disciplina;
@@ -47,7 +56,4 @@ public class Aluno extends Usuario implements Serializable {
         this.interesses = interesses;
     }
 
-    public Aluno(String nome, String endereco, String telefone, String matricula, String papel, String login, String senha, boolean autorizado) {
-        super(nome, endereco, telefone, matricula, papel, login, senha, autorizado);
-    }
 }

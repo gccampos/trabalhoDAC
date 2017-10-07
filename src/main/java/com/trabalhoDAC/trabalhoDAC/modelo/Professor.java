@@ -7,6 +7,7 @@ package com.trabalhoDAC.trabalhoDAC.modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 
 /**
@@ -15,12 +16,15 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Professor extends Usuario implements Serializable {
+
     private List<String> areaAtuacao;
     private Projeto projeto;
 
-    public Professor(String nome, String endereco, String telefone, String matricula, String papel, String login, String senha, boolean autorizado) {
-        super(nome, endereco, telefone, matricula, papel, login, senha, autorizado);
+    public Professor(String nome, String cpf, String endereco, String telefone, String matricula, String login, String senha, boolean autorizado) {
+        super(nome, cpf, endereco, telefone, matricula, login, senha, autorizado);
     }
+
+   
 
     public List<String> getAreaAtuacao() {
         return areaAtuacao;
@@ -37,6 +41,5 @@ public class Professor extends Usuario implements Serializable {
     public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
     }
-    
-    
+
 }

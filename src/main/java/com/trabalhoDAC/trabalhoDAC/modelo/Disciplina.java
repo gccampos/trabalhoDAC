@@ -23,6 +23,11 @@ public class Disciplina implements Serializable {
     private String nome;
     private int tcc;
 
+    public Disciplina(String nome, int tcc) {
+        this.nome = nome;
+        this.tcc = tcc;
+    }
+
     public Long getID() {
         return ID;
     }

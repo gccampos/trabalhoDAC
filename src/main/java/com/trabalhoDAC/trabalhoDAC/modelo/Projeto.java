@@ -32,6 +32,14 @@ public class Projeto implements Serializable {
     @ManyToOne
     private Professor orientador;
 
+    public Projeto(String titulo, Disciplina disciplina, String resumo, String cronograma, Professor orientador) {
+        this.titulo = titulo;
+        this.disciplina = disciplina;
+        this.resumo = resumo;
+        this.cronograma = cronograma;
+        this.orientador = orientador;
+    }
+
     public String getTitulo() {
         return titulo;
     }

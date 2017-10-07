@@ -16,10 +16,13 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ProjetoDAO extends JpaRepository<Projeto, Long> {
+
     @Query("select p from Projeto p where p.titulo=?1")
     public Projeto buscaPorTitulo(String titulo);
+
     @Query("select p from Projeto p where p.id_aluno=?1")
     public Projeto buscaPorAluno(Long aluno);
+
     @Query("select p from Projeto p where p.id_orientador=?1")
     public Projeto buscaPorOrientador(Long professor);
 }

@@ -23,18 +23,19 @@ public class Defesa implements Serializable {
     @Id
     @GeneratedValue
     private Long ID;
-    
+
     @Type(type = "date")
     private Date data;
     @Type(type = "time")
     private Date hora;
-    private List<Professor> banca;
+    private List<Professor> convidados;
+    private List<Professor> aceitos;
     private String sala;
     private Projeto projeto;
 
     public Defesa(Date data, Date hora, List<Professor> banca, String sala, Projeto projeto) {
         this.data = data;
-        this.banca = banca;
+        this.convidados = banca;
         this.sala = sala;
         this.projeto = projeto;
         this.hora = hora;

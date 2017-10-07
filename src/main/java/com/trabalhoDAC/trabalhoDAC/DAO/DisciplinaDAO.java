@@ -19,6 +19,5 @@ public interface DisciplinaDAO extends JpaRepository<Disciplina, Long> {
 
     @Query("SELECT d FROM Disciplina d where d.nome =?1")
     public Disciplina buscarPorNome(String nome);
-    
 
 }

@@ -6,6 +6,7 @@
 package com.trabalhoDAC.trabalhoDAC.modelo;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,29 +27,31 @@ public class Usuario implements Serializable {
     private Long ID;
 
     private static final long serialVersionUID = 1L;
-    
+
     private String nome;
     private String cpf;
     private String endereco;
     private String telefone;
     private String matricula;
-    private String papel;
+    private Set<Papel> papel;
     private String login;
     private String senha;
     private boolean autorizado;
-    
 
-    public Usuario(String nome, String endereco, String telefone, String matricula, String papel, String login, String senha, boolean autorizado) {
+    public Usuario(String nome, String cpf, String endereco, String telefone, String matricula, String login, String senha, boolean autorizado) {
         this.nome = nome;
+        this.cpf = cpf;
         this.endereco = endereco;
         this.telefone = telefone;
         this.matricula = matricula;
-        this.papel = papel;
         this.login = login;
         this.senha = senha;
         this.autorizado = autorizado;
     }
-    
+
+    public Usuario() {
+    }
+
     public String getNome() {
         return nome;
     }
@@ -81,11 +84,19 @@ public class Usuario implements Serializable {
         this.matricula = matricula;
     }
 
-    public String getPapel() {
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public Set<Papel> getPapel() {
         return papel;
     }
 
-    public void setPapel(String papel) {
+    public void setPapel(Set<Papel> papel) {
         this.papel = papel;
     }
 
@@ -112,8 +123,6 @@ public class Usuario implements Serializable {
     public void setAutorizado(boolean autorizado) {
         this.autorizado = autorizado;
     }
-    
-    
 
     public Long getID() {
         return ID;
