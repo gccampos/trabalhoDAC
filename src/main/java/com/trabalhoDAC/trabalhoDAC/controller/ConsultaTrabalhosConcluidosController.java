@@ -28,7 +28,7 @@ public class ConsultaTrabalhosConcluidosController {
 
     @Autowired
     private ProjetoService projetoService;
-    
+
     @GetMapping("/consultaTodosTrabalhosConcluidos")
     public ModelAndView serveConsultaTodosTrabalhosConcluidos() {
         ModelAndView modelAndView = new ModelAndView("consultaTodosTrabalhosConcluidos");

@@ -120,6 +120,7 @@ public class CadastroUsuarioController {
         professorService.salvar(professor);
         return new ModelAndView("redirect:/sucessoCadastroUser");
     }
+
     @PostMapping("/cadastroProfessor")
     public ModelAndView cadastroProfessor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {

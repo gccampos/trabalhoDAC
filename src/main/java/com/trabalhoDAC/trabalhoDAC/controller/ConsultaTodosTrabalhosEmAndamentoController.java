@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author guilherme
  */
 @Controller
-public class ConsultaTodosTrabalhosController {
+public class ConsultaTodosTrabalhosEmAndamentoController {
 
     @Autowired
     private ProjetoService projetoService;
