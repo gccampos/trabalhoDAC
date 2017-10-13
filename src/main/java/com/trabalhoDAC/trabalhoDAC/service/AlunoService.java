@@ -40,6 +40,10 @@ public class AlunoService {
     public List<Aluno> listarTodos() {
         return alunoDAO.findAll();
     }
+    public List<Aluno> listarNaoAutorizados() {
+        return alunoDAO.listarNaoAutorizados();
+    }
+    
 
     public Aluno salvarCadastro(Aluno aluno) {
         aluno.setSenha(bCryptPasswordEncoder.encode(aluno.getSenha()));

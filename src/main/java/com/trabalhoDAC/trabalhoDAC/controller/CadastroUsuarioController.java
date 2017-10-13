@@ -117,7 +117,7 @@ public class CadastroUsuarioController {
         areaAtuacao.add(atuacao3);
         Professor professor = new Professor(nome, cpf, endereco, telefone, matricula, login, senha, true);
         professor.setAreaAtuacao(areaAtuacao);
-        professorService.salvar(professor);
+        professorService.salvarCadastro(professor);
         return new ModelAndView("redirect:/sucessoCadastroUser");
     }
 
@@ -142,7 +142,7 @@ public class CadastroUsuarioController {
         areaAtuacao.add(atuacao3);
         Professor professor = new Professor(nome, cpf, endereco, telefone, matricula, login, senha, false);
         professor.setAreaAtuacao(areaAtuacao);
-        professorService.salvar(professor);
+        professorService.salvarCadastro(professor);
         return new ModelAndView("redirect:/sucessoCadastroUser");
     }
 }

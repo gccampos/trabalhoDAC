@@ -39,10 +39,17 @@ public class ProfessorService {
 
     public List<Professor> listarTodos() {
         return professorDAO.findAll();
-
     }
 
-    public Professor salvar(Professor professor) {
+    public List<Professor> listarNaoAutorizados() {
+        return professorDAO.listarNaoAutorizados();
+    }
+
+    public void salvar(Professor professor) {
+        professorDAO.save(professor);
+    }
+
+    public Professor salvarCadastro(Professor professor) {
         professor.setSenha(bCryptPasswordEncoder.encode(professor.getSenha()));
         Papel papel = papelService.buscarPorPapel("PROFESSOR");
         professor.setPapel(new HashSet<Papel>(Arrays.asList(papel)));

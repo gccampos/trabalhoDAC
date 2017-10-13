@@ -6,6 +6,7 @@
 package com.trabalhoDAC.trabalhoDAC.DAO;
 
 import com.trabalhoDAC.trabalhoDAC.modelo.Professor;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,5 +23,8 @@ public interface ProfessorDAO extends JpaRepository<Professor, Long> {
 
     @Query("SELECT p FROM Professor p where p.login = ?1")
     public Professor buscarPorLogin(String login);
+    
+    @Query("select p FROM Professor p where p.autorizado = false")
+    public List<Professor> listarNaoAutorizados();
 
 }
