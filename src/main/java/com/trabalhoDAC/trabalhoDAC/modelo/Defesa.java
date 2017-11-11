@@ -6,11 +6,13 @@
 package com.trabalhoDAC.trabalhoDAC.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import org.hibernate.annotations.Type;
 
 /**
@@ -28,7 +30,9 @@ public class Defesa implements Serializable {
     private Date data;
     @Type(type = "time")
     private Date hora;
+    @OneToMany
     private List<Professor> convidados;
+    @OneToMany
     private List<Professor> aceitos;
     private String sala;
     private Projeto projeto;
@@ -46,6 +50,7 @@ public class Defesa implements Serializable {
     public Long getID() {
         return ID;
     }
+  
 
     public void setID(Long ID) {
         this.ID = ID;

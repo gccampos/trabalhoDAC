@@ -112,7 +112,7 @@ public class CadastroUsuarioController {
         String atuacao1 = request.getParameter("atuacao1");
         String atuacao2 = request.getParameter("atuacao2");
         String atuacao3 = request.getParameter("atuacao3");
-        List<String> areaAtuacao = new ArrayList<String>();
+        ArrayList<String> areaAtuacao = new ArrayList<String>();
         areaAtuacao.add(atuacao1);
         areaAtuacao.add(atuacao2);
         areaAtuacao.add(atuacao3);
@@ -137,7 +137,7 @@ public class CadastroUsuarioController {
         String atuacao1 = request.getParameter("atuacao1");
         String atuacao2 = request.getParameter("atuacao2");
         String atuacao3 = request.getParameter("atuacao3");
-        List<String> areaAtuacao = new ArrayList<String>();
+        ArrayList<String> areaAtuacao = new ArrayList<String>();
         areaAtuacao.add(atuacao1);
         areaAtuacao.add(atuacao2);
         areaAtuacao.add(atuacao3);
