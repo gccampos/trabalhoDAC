@@ -21,7 +21,7 @@ public class Papel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "papel_id")
+    @Column(name = "papel_ID")
     private int id;
     private String papel;
 

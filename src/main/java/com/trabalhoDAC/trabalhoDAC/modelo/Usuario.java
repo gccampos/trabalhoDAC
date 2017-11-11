@@ -7,11 +7,15 @@ package com.trabalhoDAC.trabalhoDAC.modelo;
 
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -33,6 +37,8 @@ public class Usuario implements Serializable {
     private String endereco;
     private String telefone;
     private String matricula;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "usuario_ID"), inverseJoinColumns = @JoinColumn(name = "papel_ID"))
     private Set<Papel> papel;
     private String login;
     private String senha;
