@@ -32,13 +32,15 @@ public class Defesa implements Serializable {
     private List<Professor> aceitos;
     private String sala;
     private Projeto projeto;
+    private boolean validada;
 
-    public Defesa(Date data, Date hora, List<Professor> banca, String sala, Projeto projeto) {
+    public Defesa(Date data, Date hora, List<Professor> banca, String sala, Projeto projeto, boolean validada) {
         this.data = data;
         this.convidados = banca;
         this.sala = sala;
         this.projeto = projeto;
         this.hora = hora;
+        this.validada = validada;
     }
 
     public Long getID() {

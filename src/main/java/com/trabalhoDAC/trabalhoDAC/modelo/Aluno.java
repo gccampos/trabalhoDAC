@@ -7,9 +7,9 @@ package com.trabalhoDAC.trabalhoDAC.modelo;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Aluno extends Usuario implements Serializable {
 
-    @OneToMany
+    @OneToOne
     private Disciplina disciplina;
     @OneToMany
     private Projeto projeto;

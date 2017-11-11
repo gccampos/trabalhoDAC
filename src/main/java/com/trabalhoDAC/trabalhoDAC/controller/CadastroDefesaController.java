@@ -57,7 +57,7 @@ public class CadastroDefesaController {
         String nomeProfessor1 = request.getParameter("nomeProfessor1");
         String nomeProfessor2 = request.getParameter("nomeProfessor2");
         String nomeProfessor3 = request.getParameter("nomeProfessor3");
-
+        
         Date data = new Date(dataString);
         Date hora = new Date(horaString);
         Projeto projeto = projetoService.buscarPorTitulo(titulo);
@@ -68,7 +68,7 @@ public class CadastroDefesaController {
         convidados.add(professor);
         professor = professorService.buscarPorNome(nomeProfessor3);
         convidados.add(professor);
-        Defesa defesa = new Defesa(data, hora, convidados, sala, projeto);
+        Defesa defesa = new Defesa(data, hora, convidados, sala, projeto, false);
         defesaService.salvar(defesa);
         return new ModelAndView("sucessoCadastroDefesa");
 
