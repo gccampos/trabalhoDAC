@@ -40,9 +40,11 @@ public class Projeto implements Serializable {
         this.cronograma = cronograma;
         this.orientador = orientador;
     }
-    public Projeto(){
+
+    public Projeto() {
         this.bibliografia = new ArrayList<>();
     }
+
     public String getTitulo() {
         return titulo;
     }

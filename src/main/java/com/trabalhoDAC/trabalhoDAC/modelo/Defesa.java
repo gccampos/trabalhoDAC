@@ -50,7 +50,6 @@ public class Defesa implements Serializable {
     public Long getID() {
         return ID;
     }
-  
 
     public void setID(Long ID) {
         this.ID = ID;
