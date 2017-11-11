@@ -8,6 +8,7 @@ package com.trabalhoDAC.trabalhoDAC.service;
 import com.trabalhoDAC.trabalhoDAC.DAO.AlunoDAO;
 import com.trabalhoDAC.trabalhoDAC.modelo.Aluno;
 import com.trabalhoDAC.trabalhoDAC.modelo.Papel;
+import com.trabalhoDAC.trabalhoDAC.modelo.Projeto;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -33,6 +34,10 @@ public class AlunoService {
         return alunoDAO.buscarPorNome(nome);
     }
 
+    public Projeto buscarPorAluno(Long idALuno) {
+        return alunoDAO.buscaPorAluno(idALuno);
+    }
+
     public Aluno buscarPorId(Long id) {
         return (Aluno) alunoDAO.findOne(id);
     }
@@ -40,10 +45,10 @@ public class AlunoService {
     public List<Aluno> listarTodos() {
         return alunoDAO.findAll();
     }
+
     public List<Aluno> listarNaoAutorizados() {
         return alunoDAO.listarNaoAutorizados();
     }
-    
 
     public Aluno salvarCadastro(Aluno aluno) {
         aluno.setSenha(bCryptPasswordEncoder.encode(aluno.getSenha()));
@@ -52,7 +57,8 @@ public class AlunoService {
         alunoDAO.saveAndFlush(aluno);
         return aluno;
     }
-    public void salvar(Aluno aluno){
+
+    public void salvar(Aluno aluno) {
         alunoDAO.save(aluno);
     }
 }

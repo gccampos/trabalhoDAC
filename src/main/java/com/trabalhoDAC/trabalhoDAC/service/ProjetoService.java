@@ -25,10 +25,6 @@ public class ProjetoService {
         return projetoDAO.buscaPorTitulo(titulo);
     }
 
-    public Projeto buscarPorAluno(Long idALuno) {
-        return projetoDAO.buscaPorAluno(idALuno);
-    }
-
     public Projeto buscarPorProfessor(Long idProfessor) {
         return projetoDAO.buscaPorOrientador(idProfessor);
     }
