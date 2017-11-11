@@ -6,13 +6,14 @@
 package com.trabalhoDAC.trabalhoDAC.modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
 import org.hibernate.annotations.Type;
 
 /**
@@ -22,37 +23,37 @@ import org.hibernate.annotations.Type;
 @Entity
 public class Defesa implements Serializable {
 
-    @Id
-    @GeneratedValue
-    private Long ID;
+	@Id
+	@GeneratedValue
+	private Long ID;
 
-    @Type(type = "date")
-    private Date data;
-    @Type(type = "time")
-    private Date hora;
-    @OneToMany
-    private List<Professor> convidados;
-    @OneToMany
-    private List<Professor> aceitos;
-    private String sala;
-    private Projeto projeto;
-    private boolean validada;
+	@Type(type = "date")
+	private Date data;
+	@Type(type = "time")
+	private Date hora;
+	@OneToMany
+	private List<Professor> convidados;
+	@OneToMany
+	private List<Professor> aceitos;
+	private String sala;
+	private Projeto projeto;
+	private boolean validada;
 
-    public Defesa(Date data, Date hora, List<Professor> banca, String sala, Projeto projeto, boolean validada) {
-        this.data = data;
-        this.convidados = banca;
-        this.sala = sala;
-        this.projeto = projeto;
-        this.hora = hora;
-        this.validada = validada;
-    }
+	public Defesa(Date data, Date hora, List<Professor> banca, String sala, Projeto projeto, boolean validada) {
+		this.data = data;
+		this.convidados = banca;
+		this.sala = sala;
+		this.projeto = projeto;
+		this.hora = hora;
+		this.validada = validada;
+	}
 
-    public Long getID() {
-        return ID;
-    }
+	public Long getID() {
+		return ID;
+	}
 
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
+	public void setID(Long ID) {
+		this.ID = ID;
+	}
 
 }

@@ -5,12 +5,14 @@
  */
 package com.trabalhoDAC.trabalhoDAC.service;
 
-import com.trabalhoDAC.trabalhoDAC.DAO.DefesaDAO;
-import com.trabalhoDAC.trabalhoDAC.modelo.Defesa;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.trabalhoDAC.trabalhoDAC.DAO.DefesaDAO;
+import com.trabalhoDAC.trabalhoDAC.modelo.Defesa;
 
 /**
  *
@@ -19,26 +21,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefesaService {
 
-    @Autowired
-    private DefesaDAO defesaDAO;
+	@Autowired
+	private DefesaDAO defesaDAO;
 
-    public Defesa buscarPorOrientador(Long id, Long orientador) {
-        return defesaDAO.buscarPorOrientador(id, orientador);
-    }
+	// public Defesa buscarPorOrientador(Long id, Professor orientador) {
+	// return defesaDAO.buscarPorOrientador(id, orientador);
+	// }
 
-    public Defesa buscarPorData(Date data) {
-        return defesaDAO.buscarPorData(data);
-    }
+	public Defesa buscarPorData(Date data) {
+		return defesaDAO.buscarPorData(data);
+	}
 
-    public Defesa buscarPorId(Long id) {
-        return defesaDAO.findOne(id);
-    }
+	public Defesa buscarPorId(Long id) {
+		return defesaDAO.findOne(id);
+	}
 
-    public List<Defesa> listarTodos() {
-        return defesaDAO.findAll();
-    }
+	public List<Defesa> listarTodos() {
+		return defesaDAO.findAll();
+	}
 
-    public Defesa salvar(Defesa defesa) {
-        return defesaDAO.save(defesa);
-    }
+	public Defesa salvar(Defesa defesa) {
+		return defesaDAO.save(defesa);
+	}
 }
