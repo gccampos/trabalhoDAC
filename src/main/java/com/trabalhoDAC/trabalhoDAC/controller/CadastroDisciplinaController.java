@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,12 +27,14 @@ public class CadastroDisciplinaController {
 
     private DisciplinaService disciplinaService;
 
+    @Secured({"PROFESSOR", "ADMIN"})
     @GetMapping("cadastroDisciplina")
     public ModelAndView serveCadastroDisciplina() {
         ModelAndView modelAndView = new ModelAndView("cadastroDisciplina");
         return modelAndView;
     }
-
+    
+    @Secured({"PROFESSOR", "ADMIN"})
     @PostMapping("/cadastroDisciplina")
     public ModelAndView cadastroDisciplina(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {

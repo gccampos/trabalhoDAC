@@ -32,6 +32,10 @@ public class ProjetoService {
     public List<Projeto> listarProjetosEmAndamento() {
         return projetoDAO.listarProjetosEmAndamento();
     }
+    
+    public List<Projeto> listarProjetosEmAberto() {
+        return projetoDAO.listarProjetosEmAberto();
+    }
 
     public List<Projeto> listarProjetosConcluidos() {
         return projetoDAO.listarProjetosConcluidos();
