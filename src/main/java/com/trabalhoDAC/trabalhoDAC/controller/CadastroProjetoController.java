@@ -15,6 +15,7 @@ import com.trabalhoDAC.trabalhoDAC.service.ProfessorService;
 import com.trabalhoDAC.trabalhoDAC.service.ProjetoService;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,8 +63,8 @@ public class CadastroProjetoController {
         String nomeAluno2 = request.getParameter("nomeAluno2");
         Aluno aluno1 = alunoService.buscarPorNome(nomeAluno1);
         Aluno aluno2 = new Aluno();
-        Aluno[] alunos = new Aluno[2];
-        alunos[0] = aluno1;
+        ArrayList<Aluno> alunos = new ArrayList<Aluno>(2);
+        alunos.add(aluno1);
         if (nomeAluno2 != "") {
             aluno2 = alunoService.buscarPorNome(nomeAluno2);
             doisAlunos = true;
@@ -81,7 +82,7 @@ public class CadastroProjetoController {
         Projeto projeto = new Projeto(titulo, disciplina, resumo, cronograma, professor);
         projeto.setAlunos(alunos);
         if (doisAlunos) {
-            alunos[1] = aluno2;
+            alunos.add(aluno2);
             projeto.setAlunos(alunos);
         }
         aluno1.setProjetoInscrito(projeto);
