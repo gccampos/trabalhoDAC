@@ -8,8 +8,8 @@ package com.trabalhoDAC.trabalhoDAC.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.ElementCollection;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -35,9 +35,9 @@ public class Projeto implements Serializable {
 	@ManyToOne
 	private Professor orientador;
 	@ElementCollection
-	private ArrayList<Aluno> alunos;
+	private List<Aluno> alunos;
 
-	public ArrayList<Aluno> getAlunos() {
+	public List<Aluno> getAlunos() {
 		return alunos;
 	}
 
