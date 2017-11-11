@@ -22,6 +22,7 @@ public class Aluno extends Usuario implements Serializable {
     private Disciplina disciplina;
     @OneToOne
     private Projeto projetoInscrito;
+    @OneToMany
     private List<Projeto> projetosInteressado;
 
     public Aluno(String nome, String cpf, String endereco, String telefone, String matricula, String login, String senha, boolean autorizado) {
