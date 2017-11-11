@@ -20,7 +20,7 @@ public class Aluno extends Usuario implements Serializable {
 
     @OneToOne
     private Disciplina disciplina;
-    @OneToMany
+    @OneToOne
     private Projeto projeto;
     private List<String> interesses;
 
