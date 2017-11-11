@@ -62,6 +62,8 @@ public class CadastroProjetoController {
         String nomeAluno2 = request.getParameter("nomeAluno2");
         Aluno aluno1 = alunoService.buscarPorNome(nomeAluno1);
         Aluno aluno2 = new Aluno();
+        Aluno[] alunos = new Aluno[2];
+        alunos[0] = aluno1;
         if (nomeAluno2 != "") {
             aluno2 = alunoService.buscarPorNome(nomeAluno2);
             doisAlunos = true;
@@ -77,9 +79,10 @@ public class CadastroProjetoController {
         }
         Professor professor = professorService.buscarPorNome(nomeOrientador);
         Projeto projeto = new Projeto(titulo, disciplina, resumo, cronograma, professor);
-        projeto.setAluno1(aluno1);
+        projeto.setAlunos(alunos);
         if (doisAlunos) {
-            projeto.setAluno2(aluno2);
+            alunos[1] = aluno2;
+            projeto.setAlunos(alunos);
         }
         aluno1.setProjetoInscrito(projeto);
         alunoService.salvar(aluno1);
