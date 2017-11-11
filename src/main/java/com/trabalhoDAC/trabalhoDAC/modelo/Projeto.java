@@ -8,7 +8,7 @@ package com.trabalhoDAC.trabalhoDAC.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,91 +22,91 @@ import javax.persistence.OneToMany;
 @Entity
 public class Projeto implements Serializable {
 
-    @Id
-    @GeneratedValue
-    private Long ID;
-    private String titulo;
-    @ManyToOne
-    private Disciplina disciplina;
-    private double nota;
-    private String resumo;
-    private String cronograma;
-    private ArrayList<String> bibliografia;
-    @ManyToOne
-    private Professor orientador;
-    @OneToMany
-    private Aluno[] alunos;
+	@Id
+	@GeneratedValue
+	private Long ID;
+	private String titulo;
+	@ManyToOne
+	private Disciplina disciplina;
+	private double nota;
+	private String resumo;
+	private String cronograma;
+	private ArrayList<String> bibliografia;
+	@ManyToOne
+	private Professor orientador;
+	@OneToMany
+	private Aluno[] alunos;
 
-    public Aluno[] getAlunos() {
-        return alunos;
-    }
+	public Aluno[] getAlunos() {
+		return alunos;
+	}
 
-    public void setAlunos(Aluno[] alunos) {
-        this.alunos = alunos;
-    }
+	public void setAlunos(Aluno[] alunos) {
+		this.alunos = alunos;
+	}
 
-    public Projeto(String titulo, Disciplina disciplina, String resumo, String cronograma, Professor orientador) {
-        this.titulo = titulo;
-        this.disciplina = disciplina;
-        this.resumo = resumo;
-        this.cronograma = cronograma;
-        this.orientador = orientador;
-        this.alunos = new Aluno[2];
-    }
+	public Projeto(String titulo, Disciplina disciplina, String resumo, String cronograma, Professor orientador) {
+		this.titulo = titulo;
+		this.disciplina = disciplina;
+		this.resumo = resumo;
+		this.cronograma = cronograma;
+		this.orientador = orientador;
+		this.alunos = new Aluno[2];
+	}
 
-    public Projeto() {
-        this.bibliografia = new ArrayList<>();
-    }
+	public Projeto() {
+		this.bibliografia = new ArrayList<>();
+	}
 
-    public String getTitulo() {
-        return titulo;
-    }
+	public String getTitulo() {
+		return titulo;
+	}
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
-    public Disciplina getDisciplina() {
-        return disciplina;
-    }
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
 
-    public void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
-    }
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
 
-    public double getNota() {
-        return nota;
-    }
+	public double getNota() {
+		return nota;
+	}
 
-    public void setNota(double nota) {
-        this.nota = nota;
-    }
+	public void setNota(double nota) {
+		this.nota = nota;
+	}
 
-    public String getResumo() {
-        return resumo;
-    }
+	public String getResumo() {
+		return resumo;
+	}
 
-    public void setResumo(String resumo) {
-        this.resumo = resumo;
-    }
+	public void setResumo(String resumo) {
+		this.resumo = resumo;
+	}
 
-    public String getCronograma() {
-        return cronograma;
-    }
+	public String getCronograma() {
+		return cronograma;
+	}
 
-    public void setCronograma(String cronograma) {
-        this.cronograma = cronograma;
-    }
+	public void setCronograma(String cronograma) {
+		this.cronograma = cronograma;
+	}
 
-    public List<String> getBibliografia() {
-        return bibliografia;
-    }
+	public List<String> getBibliografia() {
+		return bibliografia;
+	}
 
-    public Long getID() {
-        return ID;
-    }
+	public Long getID() {
+		return ID;
+	}
 
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
+	public void setID(Long ID) {
+		this.ID = ID;
+	}
 }
