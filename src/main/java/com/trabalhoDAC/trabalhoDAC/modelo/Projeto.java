@@ -6,6 +6,7 @@
 package com.trabalhoDAC.trabalhoDAC.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class Projeto implements Serializable {
     private double nota;
     private String resumo;
     private String cronograma;
-    private List<String> bibliografia;
+    private ArrayList<String> bibliografia;
     @ManyToOne
     private Professor orientador;
 
@@ -39,7 +40,9 @@ public class Projeto implements Serializable {
         this.cronograma = cronograma;
         this.orientador = orientador;
     }
-
+    public Projeto(){
+        this.bibliografia = new ArrayList<>();
+    }
     public String getTitulo() {
         return titulo;
     }
