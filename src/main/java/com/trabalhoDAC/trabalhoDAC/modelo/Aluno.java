@@ -21,8 +21,8 @@ public class Aluno extends Usuario implements Serializable {
     @OneToOne
     private Disciplina disciplina;
     @OneToOne
-    private Projeto projeto;
-    private List<String> interesses;
+    private Projeto projetoInscrito;
+    private List<Projeto> projetosInteressado;
 
     public Aluno(String nome, String cpf, String endereco, String telefone, String matricula, String login, String senha, boolean autorizado) {
         super(nome, cpf, endereco, telefone, matricula, login, senha, autorizado);
@@ -40,20 +40,20 @@ public class Aluno extends Usuario implements Serializable {
         this.disciplina = disciplina;
     }
 
-    public Projeto getProjeto() {
-        return projeto;
+    public Projeto getProjetoInscrito() {
+        return projetoInscrito;
     }
 
-    public void setProjeto(Projeto projeto) {
-        this.projeto = projeto;
+    public void setProjetoInscrito(Projeto projetoInscrito) {
+        this.projetoInscrito = projetoInscrito;
     }
 
-    public List<String> getInteresses() {
-        return interesses;
+    public List<Projeto> getProjetosInteressado() {
+        return projetosInteressado;
     }
 
-    public void setInteresses(List<String> interesses) {
-        this.interesses = interesses;
+    public void setProjetosInteressado(List<Projeto> projetosInteressado) {
+        this.projetosInteressado = projetosInteressado;
     }
 
 }

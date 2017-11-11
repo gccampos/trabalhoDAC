@@ -7,6 +7,7 @@ package com.trabalhoDAC.trabalhoDAC.controller;
 
 import com.trabalhoDAC.trabalhoDAC.modelo.Aluno;
 import com.trabalhoDAC.trabalhoDAC.modelo.Professor;
+import com.trabalhoDAC.trabalhoDAC.modelo.Projeto;
 import com.trabalhoDAC.trabalhoDAC.service.AlunoService;
 import com.trabalhoDAC.trabalhoDAC.service.ProfessorService;
 import java.io.IOException;
@@ -61,12 +62,12 @@ public class CadastroUsuarioController {
         String interesse1 = request.getParameter("interesse1");
         String interesse2 = request.getParameter("interesse2");
         String interesse3 = request.getParameter("interesse3");
-        List<String> interesses = new ArrayList<String>();
-        interesses.add(interesse1);
-        interesses.add(interesse2);
-        interesses.add(interesse3);
+        List<Projeto> interesses = new ArrayList<>();
+//        interesses.add(interesse1);
+//        interesses.add(interesse2);
+//        interesses.add(interesse3);
         Aluno aluno = new Aluno(nome, cpf, endereco, telefone, matricula, login, senha, false);
-        aluno.setInteresses(interesses);
+        aluno.setProjetosInteressado(interesses);
         alunoService.salvarCadastro(aluno);
         return new ModelAndView("redirect:/sucessoCadastroUser");
     }
@@ -86,12 +87,12 @@ public class CadastroUsuarioController {
         String interesse1 = request.getParameter("interesse1");
         String interesse2 = request.getParameter("interesse2");
         String interesse3 = request.getParameter("interesse3");
-        List<String> interesses = new ArrayList<String>();
-        interesses.add(interesse1);
-        interesses.add(interesse2);
-        interesses.add(interesse3);
+        List<Projeto> interesses = new ArrayList<>();
+//        interesses.add(interesse1);
+//        interesses.add(interesse2);
+//        interesses.add(interesse3);
         Aluno aluno = new Aluno(nome, cpf, endereco, telefone, matricula, login, senha, true);
-        aluno.setInteresses(interesses);
+        aluno.setProjetosInteressado(interesses);
         alunoService.salvarCadastro(aluno);
         return new ModelAndView("redirect:/sucessoCadastroUser");
     }

@@ -75,11 +75,11 @@ public class CadastroProjetoController {
         }
         Professor professor = professorService.buscarPorNome(nomeOrientador);
         Projeto projeto = new Projeto(titulo, disciplina, resumo, cronograma, professor);
-        aluno1.setProjeto(projeto);
+        aluno1.setProjetoInscrito(projeto);
         alunoService.salvar(aluno1);
         if (doisAlunos) {
 
-            aluno2.setProjeto(projeto);
+            aluno2.setProjetoInscrito(projeto);
             alunoService.salvar(aluno2);
         }
         projetoService.salvar(projeto);

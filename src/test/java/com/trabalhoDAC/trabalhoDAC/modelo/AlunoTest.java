@@ -73,7 +73,7 @@ public class AlunoTest {
         System.out.println("getProjeto");
         Aluno instance = null;
         Projeto expResult = null;
-        Projeto result = instance.getProjeto();
+        Projeto result = instance.getProjetoInscrito();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -87,7 +87,7 @@ public class AlunoTest {
         System.out.println("setProjeto");
         Projeto projeto = null;
         Aluno instance = null;
-        instance.setProjeto(projeto);
+        instance.setProjetoInscrito(projeto);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -100,7 +100,7 @@ public class AlunoTest {
         System.out.println("getInteresses");
         Aluno instance = null;
         List<String> expResult = null;
-        List<String> result = instance.getInteresses();
+        List<String> result = instance.getProjetosInteressado();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -114,7 +114,7 @@ public class AlunoTest {
         System.out.println("setInteresses");
         List<String> interesses = null;
         Aluno instance = null;
-        instance.setInteresses(interesses);
+        instance.setProjetosInteressado(interesses);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
