@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +47,7 @@ public class CadastroProjetoController {
         return modelAndView;
     }
 
+    @Secured({"PROFESSOR", "ADMIN"})
     @PostMapping("/cadastroProjeto")
     public ModelAndView cadastroProjeto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -75,6 +77,10 @@ public class CadastroProjetoController {
         }
         Professor professor = professorService.buscarPorNome(nomeOrientador);
         Projeto projeto = new Projeto(titulo, disciplina, resumo, cronograma, professor);
+        projeto.setAluno1(aluno1);
+        if (doisAlunos) {
+            projeto.setAluno2(aluno2);
+        }
         aluno1.setProjetoInscrito(projeto);
         alunoService.salvar(aluno1);
         if (doisAlunos) {

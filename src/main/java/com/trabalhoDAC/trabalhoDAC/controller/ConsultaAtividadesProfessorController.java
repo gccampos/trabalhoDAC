@@ -15,6 +15,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +37,12 @@ public class ConsultaAtividadesProfessorController {
     @GetMapping("consultaAtividadesProfessor")
     public ModelAndView serveConsultaAtividadesProfessor() {
         ModelAndView modelAndView = new ModelAndView("consultaAtividadesProfessor");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null) {
+            modelAndView.addObject("isLogado", false);
+        } else {
+            modelAndView.addObject("isLogado", true);
+        }
         return modelAndView;
     }
 
