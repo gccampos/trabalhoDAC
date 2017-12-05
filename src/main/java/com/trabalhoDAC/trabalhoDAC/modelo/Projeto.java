@@ -5,6 +5,7 @@
  */
 package com.trabalhoDAC.trabalhoDAC.modelo;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Projeto implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Long ID;
@@ -36,6 +38,9 @@ public class Projeto implements Serializable {
 	private Professor orientador;
 	@ElementCollection
 	private List<Aluno> alunos;
+	@ElementCollection
+	private List<File> versoesParciais;
+	private File versaoFinal;
 
 	public List<Aluno> getAlunos() {
 		return alunos;
@@ -43,6 +48,10 @@ public class Projeto implements Serializable {
 
 	public void setAlunos(ArrayList<Aluno> alunos) {
 		this.alunos = alunos;
+	}
+
+	public List<File> getVersoesParciais() {
+		return this.versoesParciais;
 	}
 
 	public Projeto(String titulo, Disciplina disciplina, String resumo, String cronograma, Professor orientador) {
@@ -108,5 +117,13 @@ public class Projeto implements Serializable {
 
 	public void setID(Long ID) {
 		this.ID = ID;
+	}
+
+	public File getVersaoFinal() {
+		return versaoFinal;
+	}
+
+	public void setVersaoFinal(File versaoFinal) {
+		this.versaoFinal = versaoFinal;
 	}
 }
