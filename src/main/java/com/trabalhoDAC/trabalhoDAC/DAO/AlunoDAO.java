@@ -5,12 +5,14 @@
  */
 package com.trabalhoDAC.trabalhoDAC.DAO;
 
-import com.trabalhoDAC.trabalhoDAC.modelo.Aluno;
-import com.trabalhoDAC.trabalhoDAC.modelo.Projeto;
 import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import com.trabalhoDAC.trabalhoDAC.modelo.Aluno;
+import com.trabalhoDAC.trabalhoDAC.modelo.Projeto;
 
 /**
  *
@@ -19,15 +21,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AlunoDAO extends JpaRepository<Aluno, Long> {
 
-    @Query("SELECT a FROM Aluno a where a.nome=?1")
-    public Aluno buscarPorNome(String nome);
+	@Query("SELECT a FROM Aluno a where a.nome=?1")
+	public Aluno buscarPorNome(String nome);
 
-    @Query("SELECT a FROM Aluno a where a.login=?1")
-    public Aluno buscarPorLogin(String login);
+	@Query("SELECT a FROM Aluno a where a.matricula=?1")
+	public Aluno buscarPorMatricula(String matricula);
 
-    @Query("Select a FROM Aluno a where a.autorizado = false")
-    public List<Aluno> listarNaoAutorizados();
+	@Query("Select a FROM Aluno a where a.autorizado = false")
+	public List<Aluno> listarNaoAutorizados();
 
-    @Query("select a.projetoInscrito from Aluno a where a.ID=?1")
-    public Projeto buscaPorAluno(Long idAluno);
+	@Query("select a.projetoInscrito from Aluno a where a.ID=?1")
+	public Projeto buscaPorAluno(Long idAluno);
 }

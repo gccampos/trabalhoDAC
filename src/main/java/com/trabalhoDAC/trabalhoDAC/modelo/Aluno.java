@@ -29,9 +29,8 @@ public class Aluno extends Usuario implements Serializable {
 
 	private double CR;
 
-	public Aluno(String nome, String cpf, String endereco, String telefone, String matricula, String login,
-			String senha, boolean autorizado) {
-		super(nome, cpf, endereco, telefone, matricula, login, senha, autorizado);
+	public Aluno(String nome, String matricula, String senha, boolean autorizado) {
+		super(nome, matricula, senha, autorizado);
 	}
 
 	public Aluno() {

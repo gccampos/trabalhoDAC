@@ -8,8 +8,8 @@ package com.trabalhoDAC.trabalhoDAC.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
@@ -19,30 +19,30 @@ import javax.persistence.OneToMany;
 @Entity
 public class Professor extends Usuario implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    private ArrayList<String> areaAtuacao;
-    @OneToMany
-    private List<Projeto> projetos;
+	private static final long serialVersionUID = 1L;
+	private ArrayList<String> areaAtuacao;
+	@OneToMany
+	private List<Projeto> projetos;
 
-    public Professor(String nome, String cpf, String endereco, String telefone, String matricula, String login, String senha, boolean autorizado) {
-        super(nome, cpf, endereco, telefone, matricula, login, senha, autorizado);
-        this.projetos = new ArrayList<>();
-    }
+	public Professor(String nome, String matricula, String senha, boolean autorizado) {
+		super(nome, matricula, senha, autorizado);
+		this.projetos = new ArrayList<>();
+	}
 
-    public List<String> getAreaAtuacao() {
-        return areaAtuacao;
-    }
+	public List<String> getAreaAtuacao() {
+		return areaAtuacao;
+	}
 
-    public void setAreaAtuacao(ArrayList<String> areaAtuacao) {
-        this.areaAtuacao = areaAtuacao;
-    }
+	public void setAreaAtuacao(ArrayList<String> areaAtuacao) {
+		this.areaAtuacao = areaAtuacao;
+	}
 
-    public List<Projeto> getProjetos() {
-        return projetos;
-    }
+	public List<Projeto> getProjetos() {
+		return projetos;
+	}
 
-    public void setProjetos(List<Projeto> projetos) {
-        this.projetos = projetos;
-    }
+	public void setProjetos(List<Projeto> projetos) {
+		this.projetos = projetos;
+	}
 
 }

@@ -39,8 +39,8 @@ public class ProfessorService {
 		return professorDAO.findOne(id);
 	}
 
-	public Professor buscarPorLogin(String login) {
-		return professorDAO.buscarPorLogin(login);
+	public Professor buscarPorMatricula(String matricula) {
+		return professorDAO.buscarPorMatricula(matricula);
 	}
 
 	public List<Professor> listarTodos() {

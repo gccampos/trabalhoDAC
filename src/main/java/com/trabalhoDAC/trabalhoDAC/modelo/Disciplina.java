@@ -6,6 +6,7 @@
 package com.trabalhoDAC.trabalhoDAC.modelo;
 
 import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,22 +18,22 @@ import javax.persistence.Id;
 @Entity
 public class Disciplina implements Serializable {
 
-    @Id
-    @GeneratedValue
-    private Long ID;
-    private String nome;
-    private int tcc;
+	@Id
+	@GeneratedValue
+	private Long ID;
+	private String nome;
+	private int tcc;
 
-    public Disciplina(String nome, int tcc) {
-        this.nome = nome;
-        this.tcc = tcc;
-    }
+	// public Disciplina(String nome, int tcc) {
+	// this.nome = nome;
+	// this.tcc = tcc;
+	// }
 
-    public Long getID() {
-        return ID;
-    }
+	public Long getID() {
+		return ID;
+	}
 
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
+	public void setID(Long ID) {
+		this.ID = ID;
+	}
 }

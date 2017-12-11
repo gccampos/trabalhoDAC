@@ -7,6 +7,7 @@ package com.trabalhoDAC.trabalhoDAC.modelo;
 
 import java.io.Serializable;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,113 +28,73 @@ import javax.persistence.ManyToMany;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Usuario implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.TABLE)
-    private Long ID;
-    private static final long serialVersionUID = 1L;
-    private String nome;
-    private String cpf;
-    private String endereco;
-    private String telefone;
-    private String matricula;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "usuario_ID"), inverseJoinColumns = @JoinColumn(name = "papel_ID"))
-    private Set<Papel> papel;
-    private String login;
-    private String senha;
-    private boolean autorizado;
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private Long ID;
+	private static final long serialVersionUID = 1L;
+	private String nome;
+	private String matricula;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "usuario_papel", joinColumns = @JoinColumn(name = "usuario_ID"), inverseJoinColumns = @JoinColumn(name = "papel_ID"))
+	private Set<Papel> papel;
+	private String senha;
+	private boolean autorizado;
 
-    public Usuario(String nome, String cpf, String endereco, String telefone, String matricula, String login, String senha, boolean autorizado) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.matricula = matricula;
-        this.login = login;
-        this.senha = senha;
-        this.autorizado = autorizado;
-    }
+	public Usuario(String nome, String matricula, String senha, boolean autorizado) {
+		this.nome = nome;
+		this.matricula = matricula;
+		this.senha = senha;
+		this.autorizado = autorizado;
+	}
 
-    public Usuario() {
-    }
+	public Usuario() {
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public String getEndereco() {
-        return endereco;
-    }
+	public String getMatricula() {
+		return matricula;
+	}
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
 
-    public String getTelefone() {
-        return telefone;
-    }
+	public Set<Papel> getPapel() {
+		return papel;
+	}
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
+	public void setPapel(Set<Papel> papel) {
+		this.papel = papel;
+	}
 
-    public String getMatricula() {
-        return matricula;
-    }
+	public String getSenha() {
+		return senha;
+	}
 
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
+	public boolean isAutorizado() {
+		return autorizado;
+	}
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+	public void setAutorizado(boolean autorizado) {
+		this.autorizado = autorizado;
+	}
 
-    public Set<Papel> getPapel() {
-        return papel;
-    }
+	public Long getID() {
+		return ID;
+	}
 
-    public void setPapel(Set<Papel> papel) {
-        this.papel = papel;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public boolean isAutorizado() {
-        return autorizado;
-    }
-
-    public void setAutorizado(boolean autorizado) {
-        this.autorizado = autorizado;
-    }
-
-    public Long getID() {
-        return ID;
-    }
-
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
+	public void setID(Long ID) {
+		this.ID = ID;
+	}
 }

@@ -1,12 +1,9 @@
 package com.trabalhoDAC.trabalhoDAC.controller;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,15 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
+import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.trabalhoDAC.trabalhoDAC.modelo.Aluno;
@@ -53,98 +48,71 @@ public class ImportaCSVController {
 	}
 
 	@PostMapping("/importaCSV")
-	public ModelAndView importaCSVAluno(HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView importaCSVAluno(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("csv") MultipartFile file)
 			throws ServletException, IOException, SQLException, FileUploadException {
 		response.setContentType("text/html;charset=UTF-8");
-		DiskFileItemFactory factory = new DiskFileItemFactory();
-		ServletFileUpload upload = new ServletFileUpload(factory);
 		boolean sucesso = false;
-		String tipo = "";
-		List<FileItem> items = upload.parseRequest(new ServletRequestContext(request));
-		Iterator<FileItem> iter = items.iterator();
-		while (iter.hasNext()) {
-			FileItem item = iter.next();
-
-			if (item.isFormField()) {
-				tipo = item.getString();
-			} else {
-				if (tipo.equalsIgnoreCase("aluno")) {
-					sucesso = this.processaCSVAluno(item);
-				} else if (tipo.equalsIgnoreCase("professor")) {
-					sucesso = this.processaCSVProfessor(item);
-				} else {
-					sucesso = false;
-				}
-			}
+		if (request.getParameter("tipo").equalsIgnoreCase("aluno")) {
+			sucesso = this.processaCSVAluno(file);
+		} else if (request.getParameter("tipo").equalsIgnoreCase("professor")) {
+			sucesso = this.processaCSVProfessor(file);
+		} else {
+			sucesso = false;
 		}
-		if (sucesso) {
-			return new ModelAndView("redirect:/sucessoImport");
-		} else
-			return new ModelAndView("redirect:/erroImport");
+		// if (sucesso) {
+		// return new ModelAndView("redirect:/sucessoImport");
+		// } else
+		// return new ModelAndView("redirect:/erroImport");
+		return new ModelAndView("cadastro");
 	}
 
-	private boolean processaCSVProfessor(FileItem fi) {
-		File csv = new File("/home/Salle/ArquivosDAC");
+	private boolean processaCSVProfessor(MultipartFile fi) {
 		try {
-			fi.write(csv);
-			Reader in = new FileReader(csv);
-			Iterable<CSVRecord> it = CSVFormat.EXCEL.parse(in);
+			Iterable<CSVRecord> it = CSVFormat.EXCEL.withHeader().parse(new InputStreamReader(fi.getInputStream()));
 			for (CSVRecord r : it) {
 				String nome = r.get("nome");
-				String endereco = r.get("endereco");
-				String telefone = r.get("telefone");
-				String senha = r.get("senha");
-				String cpf = r.get("cpf");
+				String senha = "root";
 				String matricula = r.get("matricula");
-				String login = r.get("login");
 				ArrayList<String> areaAtuacao = new ArrayList<String>();
-				Professor p = professorService.buscarPorLogin(login);
+				Professor p = professorService.buscarPorMatricula(matricula);
 				if (p == null) {
-					Professor professor = new Professor(nome, cpf, endereco, telefone, matricula, login, senha, false);
+					Professor professor = new Professor(nome, matricula, senha, false);
 					professor.setAreaAtuacao(areaAtuacao);
 					professorService.salvarCadastro(professor);
-					return true;
 				} else
-					return false;
+					break;
 			}
 		} catch (Exception e) {
 			return false;
 		}
-		return false;
+		return true;
 	}
 
-	private boolean processaCSVAluno(FileItem fi) {
-		File csv = new File("/home/Salle/ArquivosDAC");
+	private boolean processaCSVAluno(MultipartFile fi) {
 		try {
-			fi.write(csv);
-			Reader in = new FileReader(csv);
-			Iterable<CSVRecord> it = CSVFormat.EXCEL.parse(in);
+			Iterable<CSVRecord> it = CSVFormat.EXCEL.withHeader().parse(new InputStreamReader(fi.getInputStream()));
 			for (CSVRecord r : it) {
 				String nome = r.get("nome");
-				String endereco = r.get("endereco");
-				String telefone = r.get("telefone");
-				String senha = r.get("senha");
-				String cpf = r.get("cpf");
+				String senha = "root";
 				String matricula = r.get("matricula");
-				String login = r.get("login");
 				String CR = r.get("CR");
 				String disc = r.get("tcc");
-				Aluno a = alunoService.buscarPorLogin(login);
+				Aluno a = alunoService.buscarPorMatricula(matricula);
 				if (a == null) {
 					List<Projeto> interesses = new ArrayList<>();
-					Disciplina d = disciplinaService.buscarPorNome(disc);
-					Aluno aluno = new Aluno(nome, cpf, endereco, telefone, matricula, login, senha, false);
+					Disciplina d = disciplinaService.buscarPorId(Long.parseLong(disc));
+					Aluno aluno = new Aluno(nome, matricula, senha, false);
 					aluno.setProjetosInteressado(interesses);
 					aluno.setCR(Double.parseDouble(CR));
 					aluno.setDisciplina(d);
-					alunoService.salvarCadastro(aluno);
-					return true;
+					alunoService.salvarCadastro(aluno, Integer.parseInt(disc));
 				} else
-					return false;
+					break;
 			}
 		} catch (Exception e) {
 			return false;
 		}
-		return false;
+		return true;
 	}
 }

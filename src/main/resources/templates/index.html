@@ -7,15 +7,14 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" crossorigin="anonymous"/>
         <script type="text/javascript" src="http://cdn.jsdelivr.net/thymol/latest/thymol.min.js"></script>
         <script type="text/javascript"> var thDebug = true; var thProtocol = "";</script>
-        
     </head>
     <body>
-        <div th:replace="./templates/navbarLogado :: navLog"></div>
+        <div th:replace="navbarNaoLogado :: navNL"></div>
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-5">Sistema de Gerenciamento de Atividades</h1>
-                <p>Seja bem-vindo, <span th:text="${aluno.nome}"></span>!</p>
-<!--                 <p><a class="btn btn-primary btn-lg" role="button">Learn more »</a></p> --> 
+                <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                <p><a class="btn btn-primary btn-lg" role="button">Learn more »</a></p>
             </div>
         </div>
         <div class="container">
@@ -37,7 +36,9 @@
                     <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
                 </div>
             </div>
+
             <hr/>
+
                 <footer>
                     <p>DAC 2017</p>
                 </footer>

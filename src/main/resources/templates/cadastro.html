@@ -10,11 +10,11 @@
         
     </head>
     <body>
-        <div th:replace="./templates/navbarLogado :: navLog"></div>
+        <div th:replace="navbarLogado :: navLog"></div>
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-5">Sistema de Gerenciamento de Atividades</h1>
-                <p>Seja bem-vindo, <span th:text="${aluno.nome}"></span>!</p>
+<!--                 <p>Seja bem-vindo, <span th:text="${aluno.nome}"></span>!</p> -->
                       <br/>              <h4>Cadastrar</h4>
                     <p>Cadastro de Alunos e Professores</p>
             </div>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                     <label>Escolha o arquivo .CSV</label>
-                    <input id="csv" name="csv" type="file"/>
+                    <input type="file" name="csv"></input>
                     </div>
                     <button type="submit" class="btn btn-secondary" role="button">Enviar</button>
                     </form>

@@ -48,17 +48,18 @@ public class AlunoService {
 		return alunoDAO.findAll();
 	}
 
-	public Aluno buscarPorLogin(String login) {
-		return alunoDAO.buscarPorLogin(login);
+	public Aluno buscarPorMatricula(String matricula) {
+		return alunoDAO.buscarPorMatricula(matricula);
 	}
 
 	public List<Aluno> listarNaoAutorizados() {
 		return alunoDAO.listarNaoAutorizados();
 	}
 
-	public Aluno salvarCadastro(Aluno aluno) {
+	public Aluno salvarCadastro(Aluno aluno, int tcc) {
 		aluno.setSenha(bCryptPasswordEncoder.encode(aluno.getSenha()));
-		Papel papel = papelService.buscarPorPapel("ALUNO");
+		String nomePapel = "TCC" + tcc;
+		Papel papel = papelService.buscarPorPapel(nomePapel);
 		aluno.setPapel(new HashSet<Papel>(Arrays.asList(papel)));
 		alunoDAO.saveAndFlush(aluno);
 		return aluno;
