@@ -6,9 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" crossorigin="anonymous"/>
         <script type="text/javascript" src="http://cdn.jsdelivr.net/thymol/latest/thymol.min.js"></script>
+        <script type="text/javascript"> var thDebug = true; var thProtocol = "";</script>
+        
     </head>
     <body>
-        <div th:replace="templates/navbarLogado :: navLog"></div>
+        <div th:replace="./templates/navbarLogado :: navLog"></div>
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-5">Sistema de Gerenciamento de Atividades</h1>
@@ -35,11 +37,9 @@
                     <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
                 </div>
             </div>
-
-            <hr>
-
+            <hr/>
                 <footer>
-                    <p>© Company 2017</p>
+                    <p>DAC 2017</p>
                 </footer>
         </div>
     </body>

@@ -27,9 +27,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.trabalhoDAC.trabalhoDAC.modelo.Aluno;
+import com.trabalhoDAC.trabalhoDAC.modelo.Disciplina;
 import com.trabalhoDAC.trabalhoDAC.modelo.Professor;
 import com.trabalhoDAC.trabalhoDAC.modelo.Projeto;
 import com.trabalhoDAC.trabalhoDAC.service.AlunoService;
+import com.trabalhoDAC.trabalhoDAC.service.DisciplinaService;
 import com.trabalhoDAC.trabalhoDAC.service.ProfessorService;
 
 @Controller
@@ -40,6 +42,9 @@ public class ImportaCSVController {
 
 	@Autowired
 	private ProfessorService professorService;
+
+	@Autowired
+	private DisciplinaService disciplinaService;
 
 	@GetMapping("/importaCSV")
 	public ModelAndView serveConsultaTodosTrabalhosConcluidos() {
@@ -85,7 +90,6 @@ public class ImportaCSVController {
 			Reader in = new FileReader(csv);
 			Iterable<CSVRecord> it = CSVFormat.EXCEL.parse(in);
 			for (CSVRecord r : it) {
-
 				String nome = r.get("nome");
 				String endereco = r.get("endereco");
 				String telefone = r.get("telefone");
@@ -94,10 +98,14 @@ public class ImportaCSVController {
 				String matricula = r.get("matricula");
 				String login = r.get("login");
 				ArrayList<String> areaAtuacao = new ArrayList<String>();
-				Professor professor = new Professor(nome, cpf, endereco, telefone, matricula, login, senha, false);
-				professor.setAreaAtuacao(areaAtuacao);
-				professorService.salvarCadastro(professor);
-				return true;
+				Professor p = professorService.buscarPorLogin(login);
+				if (p == null) {
+					Professor professor = new Professor(nome, cpf, endereco, telefone, matricula, login, senha, false);
+					professor.setAreaAtuacao(areaAtuacao);
+					professorService.salvarCadastro(professor);
+					return true;
+				} else
+					return false;
 			}
 		} catch (Exception e) {
 			return false;
@@ -119,11 +127,20 @@ public class ImportaCSVController {
 				String cpf = r.get("cpf");
 				String matricula = r.get("matricula");
 				String login = r.get("login");
-				List<Projeto> interesses = new ArrayList<>();
-				Aluno aluno = new Aluno(nome, cpf, endereco, telefone, matricula, login, senha, false);
-				aluno.setProjetosInteressado(interesses);
-				alunoService.salvarCadastro(aluno);
-				return true;
+				String CR = r.get("CR");
+				String disc = r.get("tcc");
+				Aluno a = alunoService.buscarPorLogin(login);
+				if (a == null) {
+					List<Projeto> interesses = new ArrayList<>();
+					Disciplina d = disciplinaService.buscarPorNome(disc);
+					Aluno aluno = new Aluno(nome, cpf, endereco, telefone, matricula, login, senha, false);
+					aluno.setProjetosInteressado(interesses);
+					aluno.setCR(Double.parseDouble(CR));
+					aluno.setDisciplina(d);
+					alunoService.salvarCadastro(aluno);
+					return true;
+				} else
+					return false;
 			}
 		} catch (Exception e) {
 			return false;

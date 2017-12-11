@@ -7,8 +7,8 @@ package com.trabalhoDAC.trabalhoDAC.modelo;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -19,44 +19,55 @@ import javax.persistence.OneToOne;
 @Entity
 public class Aluno extends Usuario implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @OneToOne
-    private Disciplina disciplina;
-    @OneToOne
-    private Projeto projetoInscrito;
-    @OneToMany
-    private List<Projeto> projetosInteressado;
+	private static final long serialVersionUID = 1L;
+	@OneToOne
+	private Disciplina disciplina;
+	@OneToOne
+	private Projeto projetoInscrito;
+	@OneToMany
+	private List<Projeto> projetosInteressado;
 
-    public Aluno(String nome, String cpf, String endereco, String telefone, String matricula, String login, String senha, boolean autorizado) {
-        super(nome, cpf, endereco, telefone, matricula, login, senha, autorizado);
-    }
+	private double CR;
 
-    public Aluno() {
-        super();
-    }
+	public Aluno(String nome, String cpf, String endereco, String telefone, String matricula, String login,
+			String senha, boolean autorizado) {
+		super(nome, cpf, endereco, telefone, matricula, login, senha, autorizado);
+	}
 
-    public Disciplina getDisciplina() {
-        return disciplina;
-    }
+	public Aluno() {
+		super();
+	}
 
-    public void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
-    }
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
 
-    public Projeto getProjetoInscrito() {
-        return projetoInscrito;
-    }
+	public void setCR(double cr) {
+		this.CR = cr;
+	}
 
-    public void setProjetoInscrito(Projeto projetoInscrito) {
-        this.projetoInscrito = projetoInscrito;
-    }
+	public double getCR() {
+		return this.CR;
+	}
 
-    public List<Projeto> getProjetosInteressado() {
-        return projetosInteressado;
-    }
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
 
-    public void setProjetosInteressado(List<Projeto> projetosInteressado) {
-        this.projetosInteressado = projetosInteressado;
-    }
+	public Projeto getProjetoInscrito() {
+		return projetoInscrito;
+	}
+
+	public void setProjetoInscrito(Projeto projetoInscrito) {
+		this.projetoInscrito = projetoInscrito;
+	}
+
+	public List<Projeto> getProjetosInteressado() {
+		return projetosInteressado;
+	}
+
+	public void setProjetosInteressado(List<Projeto> projetosInteressado) {
+		this.projetosInteressado = projetosInteressado;
+	}
 
 }

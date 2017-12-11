@@ -6,9 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" crossorigin="anonymous"/>
         <script type="text/javascript" src="http://cdn.jsdelivr.net/thymol/latest/thymol.min.js"></script>
+        <script type="text/javascript"> var thDebug = true; var thProtocol = "";</script>
     </head>
     <body>
-        <div th:replace="templates/navbarNaoLogado :: navNL"></div>
+        <div th:replace="./templates/navbarNaoLogado :: navNL"></div>
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-5">Sistema de Gerenciamento de Atividades</h1>
@@ -20,9 +21,9 @@
             <!-- Example row of columns -->
             <div class="row">
                 <div class="col-md-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+                    <h2>Projetos</h2>
+                    <p>Busque aqui por projetos em aberto que sejam de seu interesse.</p>
+                    <form method="get" th:action="@{/buscaProjetosMain}"><button class="btn btn-secondary" role="button">Buscar Projetos »</button></form>
                 </div>
                 <div class="col-md-4">
                     <h2>Heading</h2>
@@ -36,10 +37,10 @@
                 </div>
             </div>
 
-            <hr>
+            <hr/>
 
                 <footer>
-                    <p>© Company 2017</p>
+                    <p>DAC 2017</p>
                 </footer>
         </div>
     </body>
