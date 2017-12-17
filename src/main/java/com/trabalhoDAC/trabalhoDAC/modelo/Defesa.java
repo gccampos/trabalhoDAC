@@ -39,6 +39,10 @@ public class Defesa implements Serializable {
 	private Projeto projeto;
 	private boolean validada;
 
+	public Defesa() {
+		super();
+	}
+
 	public Defesa(Date data, Date hora, List<Professor> banca, String sala, Projeto projeto, boolean validada) {
 		this.data = data;
 		this.convidados = banca;

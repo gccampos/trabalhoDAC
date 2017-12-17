@@ -14,8 +14,8 @@
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-5">Sistema de Gerenciamento de Atividades</h1>
-<!--                 <p>Seja bem-vindo, <span th:text="${aluno.nome}"></span>!</p> -->
-                      <br/>              <h4>Cadastrar</h4>
+          <p><span th:text="${userName}"></span></p>
+                                <br/>              <h4>Cadastrar</h4>
                     <p>Cadastro de Alunos e Professores</p>
             </div>
         </div>
@@ -34,6 +34,12 @@
                     <label>Escolha o arquivo .CSV</label>
                     <input type="file" name="csv"></input>
                     </div>
+                    <div align="center" th:if="${param.error}">
+                    <p style="font-size: 20; color: #FF1C19;">Erro ao importar CSV.</p>
+                </div>
+                <div align="center" th:if="${param.sucesso}">
+                    <p style="font-size: 20; color: #42F46B;">CSV importado com sucesso.</p>
+                </div>
                     <button type="submit" class="btn btn-secondary" role="button">Enviar</button>
                     </form>
                 </div>

@@ -4,8 +4,8 @@
         <div class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:fragment="navNL">
             <a class="navbar-brand" href="#">UFF SI</a>
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" placeholder="Nome de Usuário" name="userId" id="userId" type="text"></input>
+                <form class="form-inline my-2 my-lg-0" th:action="@{/login}" method="POST">
+                    <input class="form-control mr-sm-2" placeholder="Matrícula" name="matricula" id="matricula" type="text"></input>
                     <input class="form-control mr-sm-2" placeholder="Senha" name="senha" id="senha" type="password"></input>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Fazer Login</button>
                 </form>

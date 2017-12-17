@@ -31,28 +31,25 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@Value("select u.usuario_id, u.senha from usuario u where u.usuario_id=?")
+	@Value("select u.matricula, u.senha, 1 from vw_usuarios_senhas u where u.matricula=?")
 	private String usersQuery;
 
-	@Value("select u.usuario_id, p.papel from usuario u inner join usuario_papel up on(u.usuario_id=up.usuario_id) inner join papel p on(up.papel_id=p.papel_id) where u.usuario_id=?")
+	@Value("select u.matricula, p.papel from vw_usuarios_senhas u inner join usuario_papel up on(u.id=up.usuario_id) inner join papel p on(up.papel_id=p.papel_id) where u.matricula=?")
 	private String rolesQuery;
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().usersByUsernameQuery(usersQuery).usersByUsernameQuery(usersQuery)
-				.authoritiesByUsernameQuery(rolesQuery).dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
+		auth.jdbcAuthentication().usersByUsernameQuery(usersQuery).authoritiesByUsernameQuery(rolesQuery)
+				.dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/index").permitAll().antMatchers("/login")
-				.permitAll().antMatchers("/cadastro").permitAll().antMatchers("/importaCSV").permitAll()
-				.antMatchers("/erros").permitAll().antMatchers("/cadastroUser.html").permitAll()
-				.antMatchers("/sucessoCadastroUser").permitAll().anyRequest().authenticated().and().csrf().disable()
-				.formLogin().loginPage("/login").failureUrl("/login?error=true").defaultSuccessUrl("/home")
-				.usernameParameter("userId").passwordParameter("senha").and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").and()
-				.exceptionHandling().accessDeniedPage("/403");
+				.permitAll().anyRequest().authenticated().and().csrf().disable().formLogin().loginPage("/login")
+				.failureUrl("/login?error=true").defaultSuccessUrl("/home").usernameParameter("matricula")
+				.passwordParameter("senha").and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/index").and().exceptionHandling().accessDeniedPage("/403");
 	}
 }

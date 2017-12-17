@@ -14,6 +14,8 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,8 +45,14 @@ public class ImportaCSVController {
 
 	@GetMapping("/importaCSV")
 	public ModelAndView serveConsultaTodosTrabalhosConcluidos() {
-		ModelAndView modelAndView = new ModelAndView("importaCSV");
-		return modelAndView;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Professor prof = null;
+		ModelAndView mav = new ModelAndView("importaCSV");
+		if ((prof = professorService.buscarPorMatricula((auth.getName()))) != null) {
+			mav.addObject("userName", "Bem-vindo, " + prof.getNome() + "!");
+			return mav;
+		} else
+			return new ModelAndView("redirect:/403");
 	}
 
 	@PostMapping("/importaCSV")
@@ -60,11 +68,10 @@ public class ImportaCSVController {
 		} else {
 			sucesso = false;
 		}
-		// if (sucesso) {
-		// return new ModelAndView("redirect:/sucessoImport");
-		// } else
-		// return new ModelAndView("redirect:/erroImport");
-		return new ModelAndView("cadastro");
+		if (sucesso) {
+			return new ModelAndView("redirect:/cadastro?sucesso=true");
+		} else
+			return new ModelAndView("redirect:/cadastro?error=true");
 	}
 
 	private boolean processaCSVProfessor(MultipartFile fi) {

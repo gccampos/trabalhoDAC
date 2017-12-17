@@ -3,9 +3,9 @@
     <head/>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:fragment="navLog">
-            <a class="navbar-brand" href="#">UFF SI</a>
+            <a class="navbar-brand" href="/home">UFF SI</a>
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <form class="form-inline my-2 my-lg-0">
+                <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="POST">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
                 </form>
             </div>

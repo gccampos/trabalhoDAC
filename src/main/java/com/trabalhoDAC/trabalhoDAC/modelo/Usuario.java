@@ -48,6 +48,7 @@ public class Usuario implements Serializable {
 	}
 
 	public Usuario() {
+		super();
 	}
 
 	public String getNome() {

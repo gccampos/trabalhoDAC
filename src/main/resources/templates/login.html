@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Home</title>
+        <title>Login</title>
         <meta  charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" crossorigin="anonymous"/>
         <script type="text/javascript" src="http://cdn.jsdelivr.net/thymol/latest/thymol.min.js"></script>
         <script type="text/javascript"> var thDebug = true; var thProtocol = "";</script>
+        
     </head>
     <body>
         <div th:replace="navbarNaoLogado :: navNL"></div>
         <div class="jumbotron">
             <div class="container">
                 <h1 class="display-5">Sistema de Gerenciamento de Atividades</h1>
+                      <br/>              <h4>Login</h4>
             </div>
         </div>
         <div class="container">
-            <!-- Example row of columns -->
-            <div class="row">
-                <div class="col-md-4">
-                    <h2>Projetos</h2>
-                    <p>Busque aqui por projetos em aberto que sejam de seu interesse.</p>
-                    <form method="get" th:action="@{/buscarProjetos}"><button class="btn btn-secondary" role="button">Buscar Projetos »</button></form>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form th:action="@{/login}" method="POST" class="form-signin">
+                <h3 class="form-signin-heading">Login de Usuário</h3>
+                <br/>
+
+                <input type="text" id="matricula" name="matricula" th:placeholder="Matrícula"
+                       class="form-control" /> <br/> 
+                <input type="password"  th:placeholder="Senha"
+                       id="senha" name="senha" class="form-control" /> <br /> 
+
+                <div align="center" th:if="${param.error}">
+                    <p style="font-size: 20; color: #FF1C19;">Identificação ou senha incorretos.</p>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+</form>
                 </div>
             </div>
-
             <hr/>
-
                 <footer>
                     <p>DAC 2017</p>
                 </footer>

@@ -24,6 +24,10 @@ public class Professor extends Usuario implements Serializable {
 	@OneToMany
 	private List<Projeto> projetos;
 
+	public Professor() {
+		super();
+	}
+
 	public Professor(String nome, String matricula, String senha, boolean autorizado) {
 		super(nome, matricula, senha, autorizado);
 		this.projetos = new ArrayList<>();
