@@ -24,7 +24,7 @@
                 <div class="col-md-4">
                     <h2>Projetos</h2>
                     <p>Busque aqui por projetos em aberto que sejam de seu interesse.</p>
-                    <form method="get" th:href="@{/buscarProjetos}"><button class="btn btn-secondary" role="button">Buscar Projetos »</button></form>
+                    <form method="get" th:action="@{/buscarProjetos}"><button class="btn btn-secondary" role="button">Buscar Projetos »</button></form>
                 </div>
                 <div class="col-md-4" th:if="${roleProfessor}">
                     <h2>Cadastrar Projeto</h2>

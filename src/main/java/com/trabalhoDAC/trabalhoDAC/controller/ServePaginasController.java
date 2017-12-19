@@ -1,12 +1,19 @@
 package com.trabalhoDAC.trabalhoDAC.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.trabalhoDAC.trabalhoDAC.modelo.Aluno;
@@ -41,6 +48,7 @@ public class ServePaginasController {
 		if ((usr = alunoService.buscarPorMatricula((auth.getName()))) != null) {
 			mav.addObject("roleProfessor", false);
 			mav.addObject("roleAluno", true);
+			mav.addObject("alunoTcc", usr.getDisciplina().getTcc());
 			mav.addObject("userName", "Bem-vindo, " + usr.getNome() + "!");
 		} else if ((prof = professorService.buscarPorMatricula((auth.getName()))) != null) {
 			mav.addObject("roleProfessor", true);
@@ -60,6 +68,7 @@ public class ServePaginasController {
 		if ((usr = alunoService.buscarPorMatricula((auth.getName()))) != null) {
 			mav.addObject("roleProfessor", false);
 			mav.addObject("roleAluno", true);
+			mav.addObject("alunoTcc", usr.getDisciplina().getTcc());
 			mav.addObject("userName", "Bem-vindo, " + usr.getNome() + "!");
 		} else if ((prof = professorService.buscarPorMatricula((auth.getName()))) != null) {
 			mav.addObject("roleProfessor", true);
@@ -67,9 +76,69 @@ public class ServePaginasController {
 			mav.addObject("userName", "Bem-vindo, " + prof.getNome() + "!");
 		} else {
 			mav.addObject("roleAluno", false);
+			mav.addObject("alunoTcc", 0);
 		}
 		List<Projeto> projetos = projetoService.listarProjetosEmAberto();
+		Map<Projeto, String> m = new HashMap<>();
+		for (Projeto p : projetos) {
+			Professor o = professorService.buscarPorId(p.getOrientador().getID());
+			if (o != null) {
+				m.put(p, o.getNome());
+			}
+		}
 		mav.addObject("projetos", projetos);
+		mav.addObject("mapa", m);
+		mav.setViewName("/projetos");
+		return mav;
+	}
+
+	@PostMapping(value = "/buscarProjetos", params = { "nomeProfessor", "situacao" })
+	public ModelAndView buscarProjetosProfessor(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("home");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Aluno usr = null;
+		Professor prof = null;
+		if ((usr = alunoService.buscarPorMatricula((auth.getName()))) != null) {
+			mav.addObject("roleProfessor", false);
+			mav.addObject("roleAluno", true);
+			mav.addObject("alunoTcc", usr.getDisciplina().getTcc());
+			mav.addObject("userName", "Bem-vindo, " + usr.getNome() + "!");
+		} else if ((prof = professorService.buscarPorMatricula((auth.getName()))) != null) {
+			mav.addObject("roleProfessor", true);
+			mav.addObject("roleAluno", false);
+			mav.addObject("userName", "Bem-vindo, " + prof.getNome() + "!");
+		} else {
+			mav.addObject("roleAluno", false);
+			mav.addObject("alunoTcc", 0);
+		}
+		String sit = request.getParameter("situacao");
+		List<Projeto> projetos = null;
+		switch (sit) {
+		case "aberto":
+			projetos = projetoService.listarProjetosEmAberto();
+			break;
+		case "andamento":
+			projetos = projetoService.listarProjetosEmAndamento();
+			break;
+		case "concluido":
+			projetos = projetoService.listarProjetosConcluidos();
+			break;
+		}
+		Map<Projeto, String> m = new HashMap<>();
+		List<Integer> l = new ArrayList<>();
+		for (Projeto p : projetos) {
+			Professor o = professorService.buscarPorId(p.getOrientador().getID());
+			if (o.getNome().equalsIgnoreCase(request.getParameter("nomeProfessor"))) {
+				m.put(p, o.getNome());
+			} else {
+				l.add(projetos.indexOf(p));
+			}
+		}
+		for (Integer i : l) {
+			projetos.remove(i.intValue());
+		}
+		mav.addObject("projetos", projetos);
+		mav.addObject("mapa", m);
 		mav.setViewName("/projetos");
 		return mav;
 	}

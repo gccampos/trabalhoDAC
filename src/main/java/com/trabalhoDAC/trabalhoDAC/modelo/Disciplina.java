@@ -40,4 +40,8 @@ public class Disciplina implements Serializable {
 	public void setID(Long ID) {
 		this.ID = ID;
 	}
+
+	public int getTcc() {
+		return this.tcc;
+	}
 }

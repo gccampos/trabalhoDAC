@@ -5,11 +5,13 @@
  */
 package com.trabalhoDAC.trabalhoDAC.service;
 
-import com.trabalhoDAC.trabalhoDAC.DAO.ProjetoDAO;
-import com.trabalhoDAC.trabalhoDAC.modelo.Projeto;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.trabalhoDAC.trabalhoDAC.DAO.ProjetoDAO;
+import com.trabalhoDAC.trabalhoDAC.modelo.Projeto;
 
 /**
  *
@@ -18,39 +20,39 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProjetoService {
 
-    @Autowired
-    private ProjetoDAO projetoDAO;
+	@Autowired
+	private ProjetoDAO projetoDAO;
 
-    public Projeto buscarPorTitulo(String titulo) {
-        return projetoDAO.buscaPorTitulo(titulo);
-    }
+	public Projeto buscarPorTitulo(String titulo) {
+		return projetoDAO.buscaPorTitulo(titulo);
+	}
 
-    public Projeto buscarPorProfessor(Long idProfessor) {
-        return projetoDAO.buscaPorOrientador(idProfessor);
-    }
+	public Projeto buscarPorProfessor(Long idProfessor) {
+		return projetoDAO.buscaPorOrientador(idProfessor);
+	}
 
-    public List<Projeto> listarProjetosEmAndamento() {
-        return projetoDAO.listarProjetosEmAndamento();
-    }
-    
-    public List<Projeto> listarProjetosEmAberto() {
-        return projetoDAO.listarProjetosEmAberto();
-    }
+	public List<Projeto> listarProjetosEmAndamento() {
+		return projetoDAO.listarProjetosEmAndamento();
+	}
 
-    public List<Projeto> listarProjetosConcluidos() {
-        return projetoDAO.listarProjetosConcluidos();
-    }
+	public List<Projeto> listarProjetosEmAberto() {
+		return projetoDAO.listarProjetosEmAberto();
+	}
 
-    public Projeto buscarPorId(Long id) {
-        return projetoDAO.findOne(id);
-    }
+	public List<Projeto> listarProjetosConcluidos() {
+		return projetoDAO.listarProjetosConcluidos();
+	}
 
-    public List<Projeto> listarTodos() {
-        return projetoDAO.findAll();
-    }
+	public Projeto buscarPorId(Long id) {
+		return projetoDAO.findOne(id);
+	}
 
-    public Projeto salvar(Projeto projeto) {
-        return projetoDAO.save(projeto);
-    }
+	public List<Projeto> listarTodos() {
+		return projetoDAO.findAll();
+	}
+
+	public Projeto salvar(Projeto projeto) {
+		return projetoDAO.save(projeto);
+	}
 
 }

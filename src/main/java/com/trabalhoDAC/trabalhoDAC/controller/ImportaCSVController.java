@@ -47,12 +47,12 @@ public class ImportaCSVController {
 	public ModelAndView serveConsultaTodosTrabalhosConcluidos() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Professor prof = null;
-		ModelAndView mav = new ModelAndView("importaCSV");
-		if ((prof = professorService.buscarPorMatricula((auth.getName()))) != null) {
-			mav.addObject("userName", "Bem-vindo, " + prof.getNome() + "!");
-			return mav;
-		} else
-			return new ModelAndView("redirect:/403");
+		ModelAndView mav = new ModelAndView("cadastro");
+		// if ((prof = professorService.buscarPorMatricula((auth.getName()))) != null) {
+		// mav.addObject("userName", "Bem-vindo, " + prof.getNome() + "!");
+		return mav;
+		// } else
+		// return new ModelAndView("403");
 	}
 
 	@PostMapping("/importaCSV")
@@ -87,8 +87,7 @@ public class ImportaCSVController {
 					Professor professor = new Professor(nome, matricula, senha, false);
 					professor.setAreaAtuacao(areaAtuacao);
 					professorService.salvarCadastro(professor);
-				} else
-					break;
+				}
 			}
 		} catch (Exception e) {
 			return false;
@@ -114,8 +113,7 @@ public class ImportaCSVController {
 					aluno.setCR(Double.parseDouble(CR));
 					aluno.setDisciplina(d);
 					alunoService.salvarCadastro(aluno, Integer.parseInt(disc));
-				} else
-					break;
+				}
 			}
 		} catch (Exception e) {
 			return false;

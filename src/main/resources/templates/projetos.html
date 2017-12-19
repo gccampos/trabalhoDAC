@@ -15,10 +15,29 @@
                 <h1 class="display-5">Sistema de Gerenciamento de Atividades</h1>
           <p><span th:text="${userName}"></span></p>
                                 <br/>              <h4>Projetos</h4>
-                    <p>Lista de Projetos em Aberto</p>
-            </div>
+                    <p>Lista de Projetos</p>
+        </div>
         </div>
         <div class="container">
+            <div class="container">
+            <form method="post" th:action="@{/buscarProjetos}">
+            <div class="form-group">
+            <label for="nomeProfessor">Filtrar por Professor:</label>
+            <input type="text" class="form-control" placeholder="Nome do Professor" name="nomeProfessor"/><br/>
+            </div>
+            <div class="form-group">
+            <label>Situa&ccedil;&atilde;o:</label>
+            <select name="situacao" class="form-control">
+            <option value="aberto">Projetos em Aberto</option>
+            <option value="andamento">Projetos em Andamento</option>
+            <option value="concluido">Projetos Concluidos</option>
+            </select>
+            </div>
+            <button type="submit" class = "btn btn-primary">Filtrar</button>
+            </form>
+            </div>
+            <br/>
+            <hr/>
             <div class="panel panel-default">
                 <div class="panel-body" th:each="projeto : ${projetos}">
                     <form method="post" th:action="@{/interesseProjeto}" role="form">
@@ -30,7 +49,12 @@
                     <label>Resumo:</label>
 					<span th:text="${projeto.resumo}"></span>
                     </div>
-                    <button type="submit" class="btn btn-secondary" role="button" th:if="${roleAluno}">Demonstrar Interesse</button>
+                    <div class="form-group">
+                    <label>Orientador:</label>
+					<span th:text="${mapa.get(projeto)}"></span>
+                    </div>
+                    <button type="submit" class="btn btn-secondary" role="button" th:if="${roleAluno} and ${alunoTcc} == ${projeto.disciplina.tcc}">Demonstrar Interesse</button>
+                    <hr/>
                     </form>
                 </div>
             </div>

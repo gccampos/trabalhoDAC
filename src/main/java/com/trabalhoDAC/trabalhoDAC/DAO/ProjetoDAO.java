@@ -32,7 +32,7 @@ public interface ProjetoDAO extends JpaRepository<Projeto, Long> {
 	@Query("select p from Projeto p where p.nota is not null")
 	public List<Projeto> listarProjetosConcluidos();
 
-	@Query("select p from Projeto p where p.alunos is not empty")
+	@Query("select p from Projeto p")
 	public List<Projeto> listarProjetosEmAberto();
 
 }

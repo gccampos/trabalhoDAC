@@ -30,7 +30,7 @@ public class Projeto implements Serializable {
 	private String titulo;
 	@ManyToOne
 	private Disciplina disciplina;
-	private double nota;
+	private Double nota;
 	private String resumo;
 	private String cronograma;
 	private ArrayList<String> bibliografia;
@@ -54,10 +54,12 @@ public class Projeto implements Serializable {
 		return this.versoesParciais;
 	}
 
-	public Projeto(String titulo, Disciplina disciplina, String resumo, String cronograma, Professor orientador) {
+	public Projeto(String titulo, Disciplina disciplina, Double nota, String resumo, String cronograma,
+			Professor orientador) {
 		this.titulo = titulo;
 		this.disciplina = disciplina;
 		this.resumo = resumo;
+		this.nota = nota;
 		this.cronograma = cronograma;
 		this.orientador = orientador;
 		this.alunos = new ArrayList<Aluno>(2);
@@ -84,10 +86,10 @@ public class Projeto implements Serializable {
 	}
 
 	public double getNota() {
-		return nota;
+		return nota.doubleValue();
 	}
 
-	public void setNota(double nota) {
+	public void setNota(Double nota) {
 		this.nota = nota;
 	}
 
@@ -125,5 +127,9 @@ public class Projeto implements Serializable {
 
 	public void setVersaoFinal(File versaoFinal) {
 		this.versaoFinal = versaoFinal;
+	}
+
+	public Professor getOrientador() {
+		return this.orientador;
 	}
 }

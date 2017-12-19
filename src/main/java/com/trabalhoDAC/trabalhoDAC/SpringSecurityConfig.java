@@ -46,10 +46,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/index").permitAll().antMatchers("/login")
-				.permitAll().anyRequest().authenticated().and().csrf().disable().formLogin().loginPage("/login")
-				.failureUrl("/login?error=true").defaultSuccessUrl("/home").usernameParameter("matricula")
-				.passwordParameter("senha").and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/index").and().exceptionHandling().accessDeniedPage("/403");
+		http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/buscarProjetos").permitAll()
+				.antMatchers("/index").permitAll().antMatchers("/login").permitAll().anyRequest().authenticated().and()
+				.csrf().disable().formLogin().loginPage("/login").failureUrl("/login?error=true")
+				.defaultSuccessUrl("/home").usernameParameter("matricula").passwordParameter("senha").and().logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/index").and()
+				.exceptionHandling().accessDeniedPage("/403");
 	}
 }
