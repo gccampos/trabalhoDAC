@@ -72,6 +72,7 @@ public class ServePaginasController {
 			mav.addObject("userName", "Bem-vindo, " + usr.getNome() + "!");
 		} else if ((prof = professorService.buscarPorMatricula((auth.getName()))) != null) {
 			mav.addObject("roleProfessor", true);
+			mav.addObject("profId", prof.getID());
 			mav.addObject("roleAluno", false);
 			mav.addObject("userName", "Bem-vindo, " + prof.getNome() + "!");
 		} else {
@@ -89,6 +90,58 @@ public class ServePaginasController {
 		mav.addObject("projetos", projetos);
 		mav.addObject("mapa", m);
 		mav.setViewName("/projetos");
+		return mav;
+	}
+
+	@GetMapping("/projetosinteresse")
+	public ModelAndView mostrarProjetosInteresse() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Professor prof = null;
+		ModelAndView mav = new ModelAndView("projetosInteresse");
+		if ((prof = professorService.buscarPorMatricula((auth.getName()))) != null) {
+			mav.addObject("roleProfessor", true);
+			mav.addObject("profId", prof.getID());
+			mav.addObject("roleAluno", false);
+			mav.addObject("userName", "Bem-vindo, " + prof.getNome() + "!");
+		} else {
+			return new ModelAndView("403");
+		}
+		List<Projeto> projetos = projetoService.listarProjetosEmAberto();
+		Map<Projeto, List<Aluno>> m = new HashMap<>();
+		for (Projeto p : projetos) {
+			List<Aluno> l = projetoService.listarAlunosPorProjeto(p);
+			if (l != null) {
+				m.put(p, l);
+			}
+		}
+		mav.addObject("projetos", projetos);
+		mav.addObject("mapa", m);
+		return mav;
+
+	}
+
+	@PostMapping(value = "/projetosinteresse", params = { "alunoID", "projetoId" })
+	public ModelAndView aceitarProjetosInteresse(HttpServletRequest request) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Professor prof = null;
+		ModelAndView mav = new ModelAndView("projetosInteresse");
+		if ((prof = professorService.buscarPorMatricula((auth.getName()))) != null) {
+			mav.addObject("roleProfessor", true);
+			mav.addObject("profId", prof.getID());
+			mav.addObject("roleAluno", false);
+			mav.addObject("userName", "Bem-vindo, " + prof.getNome() + "!");
+		} else {
+			return new ModelAndView("403");
+		}
+		Projeto p = projetoService.buscarPorId(Long.parseLong(request.getParameter("projetoId")));
+		Aluno a = alunoService.buscarPorId(Long.parseLong(request.getParameter("alunoID")));
+		if ((a != null) && (p != null)) {
+			a.setProjetoInscrito(p);
+			a.setProjetosInteressado(new ArrayList<>());
+		} else {
+			return new ModelAndView("redirect:/projetosInteresse?error=true");
+		}
+		mav.setViewName("redirect:/projetosInteresse?sucesso=true");
 		return mav;
 	}
 

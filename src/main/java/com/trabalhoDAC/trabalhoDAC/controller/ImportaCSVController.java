@@ -48,11 +48,11 @@ public class ImportaCSVController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Professor prof = null;
 		ModelAndView mav = new ModelAndView("cadastro");
-		// if ((prof = professorService.buscarPorMatricula((auth.getName()))) != null) {
-		// mav.addObject("userName", "Bem-vindo, " + prof.getNome() + "!");
-		return mav;
-		// } else
-		// return new ModelAndView("403");
+		if ((prof = professorService.buscarPorMatricula((auth.getName()))) != null) {
+			mav.addObject("userName", "Bem-vindo, " + prof.getNome() + "!");
+			return mav;
+		} else
+			return new ModelAndView("403");
 	}
 
 	@PostMapping("/importaCSV")

@@ -19,22 +19,6 @@
         </div>
         </div>
         <div class="container">
-            <div class="container">
-            <form method="post" th:action="@{/buscarProjetos}">
-            <div class="form-group">
-            <label for="nomeProfessor">Filtrar por Professor:</label>
-            <input type="text" class="form-control" placeholder="Nome do Professor" name="nomeProfessor"/><br/>
-            </div>
-            <div class="form-group">
-            <label>Situa&ccedil;&atilde;o:</label>
-            <select name="situacao" class="form-control">
-            <option value="aberto">Projetos em Aberto</option>
-            <option value="andamento">Projetos em Andamento</option>
-            <option value="concluido">Projetos Concluidos</option>
-            </select>
-            </div>
-            <button type="submit" class = "btn btn-primary">Filtrar</button>
-            </form>
             </div>
             <br/>
             <hr/>
@@ -46,7 +30,7 @@
                     <p style="font-size: 20; color: #42F46B;">Você demonstrou interesse no projeto com sucesso.</p>
                 </div>
                 <div class="panel-body" th:each="projeto : ${projetos}">
-                    <form method="post" th:action="@{/interesseProjeto}" role="form">
+                    <form method="post" th:action="@{/adicionarAlunoProjeto}" role="form" th:if="${projeto.orientador.ID}==${profId}">
                     <div class="form-group">
                     <label>Título:</label>
 					<span th:text="${projeto.titulo}"></span>
@@ -56,13 +40,13 @@
 					<span th:text="${projeto.resumo}"></span>
                     </div>
                     <div class="form-group">
-                    <label>Orientador:</label>
-					<span th:text="${mapa.get(projeto)}"></span>
-                    </div>
-                    <div class="form-group">
                     <input type="hidden" name="projetoId" th:value="${projeto.ID}"/>
                     </div>
-                    <button type="submit" class="btn btn-secondary" role="button" th:if="${roleAluno} and ${alunoTcc} == ${projeto.disciplina.tcc}">Demonstrar Interesse</button>
+                    <div class="form-group" th:each="aluno : ${mapa.get(projeto)}">
+                    <label>Aluno: </label><span th:text="${aluno.nome}"></span>
+                    <input type="hidden" name="alunoID" th:value="${aluno.ID}"/>
+                    <button type="submit" class="btn btn-secondary" role="button">Aceitar Aluno</button>
+                    </div>
                     <hr/>
                     </form>
                 </div>
@@ -71,6 +55,5 @@
                 <footer>
                     <p>DAC 2017</p>
                 </footer>
-        </div>
     </body>
 </html>

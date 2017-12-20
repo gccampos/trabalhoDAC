@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trabalhoDAC.trabalhoDAC.DAO.ProjetoDAO;
+import com.trabalhoDAC.trabalhoDAC.modelo.Aluno;
 import com.trabalhoDAC.trabalhoDAC.modelo.Projeto;
 
 /**
@@ -53,6 +54,10 @@ public class ProjetoService {
 
 	public Projeto salvar(Projeto projeto) {
 		return projetoDAO.save(projeto);
+	}
+
+	public List<Aluno> listarAlunosPorProjeto(Projeto projeto) {
+		return projetoDAO.listarAlunosPorProjeto(projeto);
 	}
 
 }
